@@ -47,6 +47,7 @@ plt.show()
 """
 
 def FWHM(x,y):
+    #returns width
     d = y - (max(y) / 2) 
     indexes = np.where(d > 0)[0] 
     return abs(x[indexes[-1]] - x[indexes[0]])
@@ -58,6 +59,7 @@ print(FWHM(w,conv))
 widths=[]
 fwhms=[]
 for i in range(200):
+    #create scatter plot with random widths
     dwL=random.random()
     dwG=random.random()
     gauss=Gaussian(w,50,dwG)
