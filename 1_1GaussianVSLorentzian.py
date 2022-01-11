@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jan  9 17:07:31 2022
-
-@author: iammo
-"""
 import numpy as np
 from scipy.integrate import quad
 import matplotlib.pyplot as plt
