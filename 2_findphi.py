@@ -25,8 +25,8 @@ V_g=A*L*n
 def odes(y,t):
     phi=y[0]
     M_2=y[1]
-    dphidt= K*M_2(t)*(phi+1)-phi/tau_c
-    dM_2dt= Q_2-K*M_2*phi(t)-M_2/tau_21
+    dphidt= K*M_2*(phi+1)-phi/tau_c
+    dM_2dt= Q_2-K*M_2*phi-M_2/tau_21
     return [dphidt,dM_2dt]
 
 #initial values
@@ -37,4 +37,9 @@ y0=[phi0,M_20]
 t=np.linspace(0,100,10000)
 y=odeint(odes,y0,t)
 
-plt.plot(t,0)
+phi=y[:,0]
+M_2=y[:,1]
+
+plt.plot(t,phi)
+plt.plot(t,M_2)
+plt.show()
