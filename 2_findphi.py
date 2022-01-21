@@ -1,3 +1,4 @@
+from distutils.util import Mixin2to3
 from scipy.integrate import odeint
 import numpy as np
 import matplotlib.pyplot as plt
@@ -42,8 +43,43 @@ phi=y[:,0]
 M_2=y[:,1]
 """
 phi,M_2=y.T
-
+plt.figure()
 plt.plot(t,phi,label="phi")
+plt.legend()
+plt.xlabel("time,t (s)")
+
+plt.figure()
 plt.plot(t,M_2, label="M2")
 plt.legend()
+plt.xlabel("time,t (s)")
+
 plt.show()
+
+
+#steady state
+#for steady state, oscillations in phi fall below 10% of original amplitude for example?
+#or to 1/e**2
+
+
+#%%
+
+#Extension
+
+def func(x,A,B,C,D,E):
+    #oscillations under exponential envelope
+    x0=0.0008
+    return A*np.exp(-E*(x-x0))*np.cos(B*(x-x0)+C) + D
+
+from scipy.optimize import curve_fit
+#consider only beyond T=0.0008
+cutindex=np.where(t>0.0008)[0][0]
+phi_=phi[cutindex:]
+t1=t[cutindex:]
+popt,pcov=curve_fit(func,t1,phi_,p0=[0.7*10**11,2000000,0,1.5*10**11,10000])
+plt.plot(t1,func(t1,*popt),label="curve fit")
+plt.plot(t1,phi_,label="phi")
+#plt.plot(t1,func(t1,0.7*10**11,2000000,0,1.5*10**11,10000))
+print(popt)
+plt.legend()
+plt.show()
+# %%
