@@ -1,4 +1,4 @@
-from distutils.util import Mixin2to3
+
 from scipy.integrate import odeint
 import numpy as np
 import matplotlib.pyplot as plt
